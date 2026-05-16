@@ -18,7 +18,7 @@
 #include "esp_timer.h"
 
 static const uint32_t SAMPLE_PERIOD_US = 5000;  // 200 Hz
-static const uint32_t SERIAL_BAUD = 921600;
+static const uint32_t SERIAL_BAUD = 115200;
 
 static volatile bool tick = false;
 static esp_timer_handle_t sample_timer;

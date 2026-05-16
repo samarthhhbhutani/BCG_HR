@@ -114,7 +114,7 @@ class Receiver:
             self._writer_thread.join(timeout=5)
 
     def _read_loop(self) -> None:
-        with serial.Serial(self.port, 921600, timeout=1) as s:
+        with serial.Serial(self.port, 115200, timeout=1) as s:
             self._stats["started_at"] = datetime.now(timezone.utc).isoformat()
             buf = bytearray()
             while not self._stop.is_set():

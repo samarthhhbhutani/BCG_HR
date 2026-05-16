@@ -1,0 +1,10 @@
+{
+  "subject": "self",
+  "mount": "sternum-finger-press",
+  "note": "trial 1",
+  "started_utc": "20260515T182947Z",
+  "sample_rate_hz": 200,
+  "fs_accel_g": 4.0,
+  "fs_gyro_dps": 1000.0,
+  "port": "/dev/cu.usbserial-5B1E0428731"
+}
