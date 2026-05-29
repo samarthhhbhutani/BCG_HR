@@ -1,0 +1,95 @@
+{
+  "session_dir": "data/session_20260524T201533Z",
+  "fs_measured": 197.72823289849762,
+  "n_samples": 22657,
+  "duration_s": 114.58657002449036,
+  "detectors_run": [
+    "terma",
+    "elgendi",
+    "bishop",
+    "charlton"
+  ],
+  "detectors_skipped": [],
+  "per_pipeline": {
+    "terma": {
+      "n_peaks": 68,
+      "runtime_ms": 2.6470000157132745,
+      "mean_hr_bpm": 45.4960620242393,
+      "consensus_f1": 0.014492753623188404
+    },
+    "elgendi": {
+      "n_peaks": 91,
+      "runtime_ms": 1079.1165419504978,
+      "mean_hr_bpm": 64.12205802245377,
+      "consensus_f1": 0.8695652173913044
+    },
+    "bishop": {
+      "n_peaks": 118,
+      "runtime_ms": 13686.106417037081,
+      "mean_hr_bpm": 65.95308996383694,
+      "consensus_f1": 0.7446808510638298
+    },
+    "charlton": {
+      "n_peaks": 134,
+      "runtime_ms": 22.157083032652736,
+      "mean_hr_bpm": 66.78413160389336,
+      "consensus_f1": 0.6862745098039216
+    }
+  },
+  "pairwise_f1": {
+    "terma__vs__elgendi": {
+      "tp": 1,
+      "fp": 67,
+      "fn": 90,
+      "precision": 0.014705882352941176,
+      "recall": 0.01098901098901099,
+      "f1": 0.01257861635220126
+    },
+    "terma__vs__bishop": {
+      "tp": 1,
+      "fp": 67,
+      "fn": 117,
+      "precision": 0.014705882352941176,
+      "recall": 0.00847457627118644,
+      "f1": 0.01075268817204301
+    },
+    "terma__vs__charlton": {
+      "tp": 1,
+      "fp": 67,
+      "fn": 133,
+      "precision": 0.014705882352941176,
+      "recall": 0.007462686567164179,
+      "f1": 0.009900990099009901
+    },
+    "elgendi__vs__bishop": {
+      "tp": 73,
+      "fp": 18,
+      "fn": 45,
+      "precision": 0.8021978021978022,
+      "recall": 0.6186440677966102,
+      "f1": 0.6985645933014355
+    },
+    "elgendi__vs__charlton": {
+      "tp": 81,
+      "fp": 10,
+      "fn": 53,
+      "precision": 0.8901098901098901,
+      "recall": 0.6044776119402985,
+      "f1": 0.7199999999999999
+    },
+    "bishop__vs__charlton": {
+      "tp": 114,
+      "fp": 4,
+      "fn": 20,
+      "precision": 0.9661016949152542,
+      "recall": 0.8507462686567164,
+      "f1": 0.9047619047619047
+    }
+  },
+  "consensus_f1": {
+    "terma": 0.014492753623188404,
+    "elgendi": 0.8695652173913044,
+    "bishop": 0.7446808510638298,
+    "charlton": 0.6862745098039216
+  }
+}

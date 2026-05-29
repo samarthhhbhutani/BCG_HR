@@ -1,0 +1,95 @@
+{
+  "session_dir": "/Users/samarrth/Desktop/HR/Heart_Rate_PPG/data/session_20260529T171103Z",
+  "fs_measured": 197.79930536456934,
+  "n_samples": 20771,
+  "duration_s": 105.01047992706299,
+  "detectors_run": [
+    "terma",
+    "elgendi",
+    "bishop",
+    "charlton"
+  ],
+  "detectors_skipped": [],
+  "per_pipeline": {
+    "terma": {
+      "n_peaks": 129,
+      "runtime_ms": 2.8419580194167793,
+      "mean_hr_bpm": 87.6321879137664,
+      "consensus_f1": 0.007604562737642585
+    },
+    "elgendi": {
+      "n_peaks": 138,
+      "runtime_ms": 1082.5144170084968,
+      "mean_hr_bpm": 86.20555819978058,
+      "consensus_f1": 0.9852941176470589
+    },
+    "bishop": {
+      "n_peaks": 135,
+      "runtime_ms": 12141.452790994663,
+      "mean_hr_bpm": 86.58446793837756,
+      "consensus_f1": 0.9888475836431226
+    },
+    "charlton": {
+      "n_peaks": 141,
+      "runtime_ms": 20.24137502303347,
+      "mean_hr_bpm": 86.77383629779217,
+      "consensus_f1": 0.9745454545454546
+    }
+  },
+  "pairwise_f1": {
+    "terma__vs__elgendi": {
+      "tp": 2,
+      "fp": 127,
+      "fn": 136,
+      "precision": 0.015503875968992248,
+      "recall": 0.014492753623188406,
+      "f1": 0.0149812734082397
+    },
+    "terma__vs__bishop": {
+      "tp": 0,
+      "fp": 129,
+      "fn": 135,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "terma__vs__charlton": {
+      "tp": 1,
+      "fp": 128,
+      "fn": 140,
+      "precision": 0.007751937984496124,
+      "recall": 0.0070921985815602835,
+      "f1": 0.007407407407407408
+    },
+    "elgendi__vs__bishop": {
+      "tp": 133,
+      "fp": 5,
+      "fn": 2,
+      "precision": 0.9637681159420289,
+      "recall": 0.9851851851851852,
+      "f1": 0.9743589743589742
+    },
+    "elgendi__vs__charlton": {
+      "tp": 137,
+      "fp": 1,
+      "fn": 4,
+      "precision": 0.9927536231884058,
+      "recall": 0.9716312056737588,
+      "f1": 0.9820788530465949
+    },
+    "bishop__vs__charlton": {
+      "tp": 135,
+      "fp": 0,
+      "fn": 6,
+      "precision": 1.0,
+      "recall": 0.9574468085106383,
+      "f1": 0.9782608695652174
+    }
+  },
+  "consensus_f1": {
+    "terma": 0.007604562737642585,
+    "elgendi": 0.9852941176470589,
+    "bishop": 0.9888475836431226,
+    "charlton": 0.9745454545454546
+  }
+}

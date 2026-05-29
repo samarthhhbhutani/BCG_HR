@@ -1,0 +1,21 @@
+{
+  "subject": "self",
+  "species": "human",
+  "mount": "finger",
+  "note": "",
+  "subject_config": {
+    "name": "human",
+    "hr_min_bpm": 40.0,
+    "hr_max_bpm": 200.0,
+    "ibi_min_ms": 300.0,
+    "ibi_max_ms": 1500.0,
+    "bandpass_low_hz": 0.5,
+    "bandpass_high_hz": 4.0,
+    "contact_ir_min": 50000.0,
+    "contact_ir_max": 260000.0,
+    "contact_ac_min": 200.0
+  },
+  "started_utc": "20260524T201533Z",
+  "sample_rate_hz": 200,
+  "port": "/dev/cu.usbserial-5B1E0428731"
+}
