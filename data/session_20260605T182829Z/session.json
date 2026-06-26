@@ -1,0 +1,10 @@
+{
+  "subject": "self",
+  "mount": "sternum-finger-press",
+  "note": "BMI330 first run",
+  "started_utc": "20260605T182829Z",
+  "sample_rate_hz": 200,
+  "fs_accel_g": 4.0,
+  "fs_gyro_dps": 1000.0,
+  "port": "/dev/cu.usbmodem101"
+}

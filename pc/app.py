@@ -30,16 +30,19 @@ import protocol
 from hr_worker import HRWorker, WINDOW_S
 from receiver import Receiver, autodetect_port
 from ringbuffer import RingBuffer, COL_AX, COL_AY, COL_AZ
+from step_worker import StepWorker
 
 
 HR_HISTORY_S = 300
 
 
 class HRWindow(QtWidgets.QMainWindow):
-    def __init__(self, ring: RingBuffer, worker: HRWorker, receiver: Receiver):
+    def __init__(self, ring: RingBuffer, worker: HRWorker, receiver: Receiver,
+                 step_worker: StepWorker | None = None):
         super().__init__()
         self.ring = ring
         self.worker = worker
+        self.step_worker = step_worker
         self.receiver = receiver
         self.setWindowTitle("HR — M5StickC PLUS2 SCG")
         self.resize(1200, 900)
@@ -82,6 +85,14 @@ class HRWindow(QtWidgets.QMainWindow):
         self.lbl_meta = QtWidgets.QLabel("waiting for data…")
         status.addWidget(self.lbl_meta, stretch=1)
 
+        # Step counter readout
+        self.lbl_steps = QtWidgets.QLabel("Steps: 0")
+        self.lbl_steps.setStyleSheet("font-size: 28px; font-weight: bold; color: #1f77b4;")
+        status.addWidget(self.lbl_steps)
+        self.lbl_steps_meta = QtWidgets.QLabel("idle")
+        self.lbl_steps_meta.setStyleSheet("font-size: 13px; color: #888;")
+        status.addWidget(self.lbl_steps_meta)
+
         rec_row = QtWidgets.QHBoxLayout()
         layout.addLayout(rec_row)
         self.btn_rec = QtWidgets.QPushButton("● Start Recording  (Space)")
@@ -121,6 +132,8 @@ class HRWindow(QtWidgets.QMainWindow):
             self.btn_rec.setStyleSheet(self._btn_style(False))
         else:
             session_dir = self.receiver.arm()
+            if self.step_worker is not None:
+                self.step_worker.reset()  # steps count fresh from each recording
             self._t_record_start = time.time()
             self.btn_rec.setChecked(True)
             self.btn_rec.setText("■ Stop Recording  (Space)")
@@ -179,6 +192,18 @@ class HRWindow(QtWidgets.QMainWindow):
             t_axis = np.arange(data.shape[0]) / protocol.SAMPLE_RATE_HZ
             self.curve_raw.setData(t_axis, data[:, COL_AZ])
 
+        # Step counter readout
+        if self.step_worker is not None:
+            su = self.step_worker.latest
+            if su is not None:
+                cadence_str = f"{su.cadence_spm:.0f} spm" if not np.isnan(su.cadence_spm) else "— spm"
+                self.lbl_steps.setText(f"Steps: {su.total_steps}")
+                self.lbl_steps_meta.setText(f"{su.activity}  ·  {cadence_str}")
+                color_map = {"still": "#888888", "walking": "#2ca02c", "running": "#d62728"}
+                self.lbl_steps.setStyleSheet(
+                    f"font-size: 28px; font-weight: bold; color: {color_map.get(su.activity, '#1f77b4')};"
+                )
+
         # Refresh recording status line + always-visible receiver stats
         st = self.receiver.stats()
         rx_info = (
@@ -226,13 +251,18 @@ def main() -> int:
     worker_thread = threading.Thread(target=worker.run, name="hr-worker", daemon=True)
     worker_thread.start()
 
+    step_worker = StepWorker(ring=ring)
+    step_thread = threading.Thread(target=step_worker.run, name="step-worker", daemon=True)
+    step_thread.start()
+
     app = QtWidgets.QApplication(sys.argv)
-    win = HRWindow(ring=ring, worker=worker, receiver=rx)
+    win = HRWindow(ring=ring, worker=worker, receiver=rx, step_worker=step_worker)
     win.show()
     rc = app.exec()
     rx.disarm()
     rx.stop()
     worker.stop()
+    step_worker.stop()
     return rc
 
 
